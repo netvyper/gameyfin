@@ -976,6 +976,7 @@ class GameServiceTest {
         every { pluginService.getPluginManagementEntry(provider.javaClass) } returns pluginEntry
         every { pluginManager.whichPlugin(ofType<Class<out GameMetadataProvider>>()) } returns pluginWrapper
         every { config.get(ConfigProperties.Libraries.Scan.ExtractTitleUsingRegex) } returns true
+        every { config.get(ConfigProperties.Libraries.Scan.SanitizeTitle) } returns true
         every { config.get(ConfigProperties.Libraries.Scan.TitleExtractionRegex) } returns "^[^\\(\\[]*"
         every { config.get(ConfigProperties.Libraries.Scan.TitleMatchMinRatio) } returns 85
         every { imageService.createOrGet(any()) } returns mockk(relaxed = true)
@@ -1003,6 +1004,7 @@ class GameServiceTest {
         every { pluginManager.getExtensions(GameMetadataProvider::class.java) } returns listOf(provider)
         every { pluginService.getPluginManagementEntry(provider.javaClass) } returns pluginEntry
         every { config.get(ConfigProperties.Libraries.Scan.ExtractTitleUsingRegex) } returns false
+        every { config.get(ConfigProperties.Libraries.Scan.SanitizeTitle) } returns true
 
         val path = Path.of("/test/Unknown Game.exe")
         val result = gameService.matchFromFile(path, library)
@@ -1050,6 +1052,7 @@ class GameServiceTest {
         every { pluginService.getPluginManagementEntry(provider.javaClass) } returns pluginEntry
         every { pluginManager.whichPlugin(ofType<Class<out GameMetadataProvider>>()) } returns pluginWrapper
         every { config.get(ConfigProperties.Libraries.Scan.ExtractTitleUsingRegex) } returns false
+        every { config.get(ConfigProperties.Libraries.Scan.SanitizeTitle) } returns true
         every { config.get(ConfigProperties.Libraries.Scan.TitleMatchMinRatio) } returns 85
         every { imageService.createOrGet(any()) } returns mockk(relaxed = true)
         every { filesystemService.calculateFileSize(any()) } returns 1000L
@@ -1083,6 +1086,7 @@ class GameServiceTest {
         every { pluginService.getPluginManagementEntry(provider.javaClass) } returns pluginEntry
         every { pluginManager.whichPlugin(ofType<Class<out GameMetadataProvider>>()) } returns pluginWrapper
         every { config.get(ConfigProperties.Libraries.Scan.ExtractTitleUsingRegex) } returns true
+        every { config.get(ConfigProperties.Libraries.Scan.SanitizeTitle) } returns true
         every { config.get(ConfigProperties.Libraries.Scan.TitleExtractionRegex) } returns "["  // Invalid regex
         every { config.get(ConfigProperties.Libraries.Scan.TitleMatchMinRatio) } returns 85
         every { imageService.createOrGet(any()) } returns mockk(relaxed = true)

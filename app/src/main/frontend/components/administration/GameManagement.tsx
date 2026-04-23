@@ -113,6 +113,7 @@ function GameManagementLayout({getConfig, formik}: any) {
                     <ConfigFormField configElement={getConfig("library.scan.title-extraction-regex")}
                                      isDisabled={!formik.values.library.scan["extract-title-using-regex"]}/>
                 </div>
+                <ConfigFormField configElement={getConfig("library.scan.sanitize-title")}/>
                 <ConfigFormField configElement={getConfig("library.scan.title-match-min-ratio")}/>
                 <ConfigFormField configElement={getConfig("library.scan.game-file-extensions")}/>
                 <ConfigFormField configElement={getConfig("library.scan.max-concurrency")}/>

@@ -61,6 +61,14 @@ sealed class ConfigProperties<T : Serializable>(
                 "Java-compatible regular expression used to extract the game title from a file name. The first captured group (or full match) is used as the title.",
                 "^[^\\[]+"
             )
+            data object SanitizeTitle : ConfigProperties<Boolean>(
+                Boolean::class,
+                "library.scan.sanitize-title",
+                "Sanitize extracted title",
+                "When enabled, dots (.) and underscores (_) in the extracted title are replaced with spaces and multiple spaces are collapsed.",
+                true
+            )
+
 
             data object TitleMatchMinRatio : ConfigProperties<Int>(
                 Int::class,
