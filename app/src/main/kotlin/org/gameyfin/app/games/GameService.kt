@@ -17,6 +17,7 @@ import org.gameyfin.app.core.plugins.management.GameyfinPluginDescriptor
 import org.gameyfin.app.core.plugins.management.GameyfinPluginManager
 import org.gameyfin.app.core.plugins.management.PluginManagementEntry
 import org.gameyfin.app.core.replaceRomanNumerals
+import org.gameyfin.app.core.sanitizeTitle
 import org.gameyfin.app.core.security.getCurrentAuth
 import org.gameyfin.app.games.dto.*
 import org.gameyfin.app.games.entities.*
@@ -663,6 +664,10 @@ class GameService(
                 log.warn { "No regex configured for title extraction, using full filename '$query'" }
             }
         }
+        if (config.get(ConfigProperties.Libraries.Scan.SanitizeTitle) == true) {
+            query = query.sanitizeTitle()
+        }
+
 
         // Step 1: Query all metadata plugins for metadata on the provided game title and filter the results
         //         so that only valid results (non-empty) and valid platforms remain

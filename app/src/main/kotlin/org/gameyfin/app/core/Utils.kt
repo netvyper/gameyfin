@@ -190,3 +190,13 @@ fun nanoTimeToInstant(nanoTime: Long): Instant {
     val nanoNow = nanoTime + Utils.jvmNanoTimeDiff
     return Instant.ofEpochSecond(nanoNow.nanoseconds.inWholeSeconds)
 }
+
+/**
+ * Sanitizes a title by replacing dots and underscores with spaces, collapsing multiple spaces and trimming.
+ */
+fun String.sanitizeTitle(): String {
+    return this.replace('.', ' ')
+        .replace('_', ' ')
+        .replace(Regex("\\s+"), " ")
+        .trim()
+}
